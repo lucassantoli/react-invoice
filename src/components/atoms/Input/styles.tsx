@@ -5,6 +5,8 @@ export const Input = styled.input`
   padding: 6px 12px;
   font-size: 18px;
   border-radius: 0;
+  width: 100%;
+  max-width: 300px;
 
   :hover,
   :focus {

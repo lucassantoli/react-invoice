@@ -4,9 +4,12 @@ const Button = styled.button`
   padding: 6px 12px;
   font-size: 18px;
   font-weight: normal;
+  cursor: pointer;
   border: 1px solid transparent;
   border-radius: 4px;
   color: white;
+  display: flex;
+  align-items: center;
 `;
 
 export const ButtonPrimary = styled(Button)`

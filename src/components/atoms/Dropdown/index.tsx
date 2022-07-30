@@ -14,8 +14,10 @@ interface OptionProps {
 const Dropdown: FC<DropdownProps> = ({ list }) => {
   return (
     <StyledDropdown>
-      {list.map((option: OptionProps) => (
-        <StyledOption value={option.value}>{option.text}</StyledOption>
+      {list.map((option: OptionProps, index: number) => (
+        <StyledOption key={index} value={option.value}>
+          {option.text}
+        </StyledOption>
       ))}
     </StyledDropdown>
   );
