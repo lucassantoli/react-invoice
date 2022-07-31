@@ -15,19 +15,31 @@ interface CurrenciesProps {
 }
 
 interface Props {
-  inputs: Array<InputProps>;
+  company_inputs: Array<InputProps>;
+  customer_inputs: Array<InputProps>;
   currencies: Array<CurrenciesProps>;
   children?: React.ReactNode;
 }
 
-const InvoiceForm: FC<Props> = ({ inputs, currencies, children }) => {
+const InvoiceForm: FC<Props> = ({
+  company_inputs,
+  customer_inputs,
+  currencies,
+  children,
+}) => {
   return (
     <StyledForm action="">
-      {inputs.map((input, index) => (
-        <Input value={input.value} key={index}></Input>
-      ))}
-      {inputs.length % 2 ? null : <></>}
+      <div className="customer">
+        {customer_inputs.map((input, index) => (
+          <Input value={input.value} key={index}></Input>
+        ))}
+      </div>
 
+      <div className="company">
+        {company_inputs.map((input, index) => (
+          <Input value={input.value} key={index}></Input>
+        ))}
+      </div>
       <Dropdown list={currencies}></Dropdown>
     </StyledForm>
   );
