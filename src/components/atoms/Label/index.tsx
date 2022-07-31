@@ -1,18 +1,19 @@
 import React, { FC } from "react";
 
-import { Label as StyledLabel, LabelBold as StyledLabelBold } from "./styles";
+import { Label as StyledLabel } from "./styles";
 
 interface Props {
   children: React.ReactNode;
   color?: string;
+  htmlFor?: string;
 }
 
-const Label: FC<Props> = ({ children, color }) => {
-  return <StyledLabel color={color}>{children}</StyledLabel>;
+const Label: FC<Props> = ({ children, color, htmlFor }) => {
+  return (
+    <StyledLabel color={color} htmlFor={htmlFor}>
+      {children}
+    </StyledLabel>
+  );
 };
 
-const LabelBold: FC<Props> = ({ children, color }) => {
-  return <StyledLabelBold color={color}>{children}</StyledLabelBold>;
-};
-
-export { Label, LabelBold };
+export { Label };

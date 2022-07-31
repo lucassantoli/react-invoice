@@ -5,8 +5,4 @@ const Label = styled.label`
   color: ${(props) => props.color};
 `;
 
-const LabelBold = styled(Label)`
-  font-weight: bold;
-`;
-
-export { Label, LabelBold };
+export { Label };
