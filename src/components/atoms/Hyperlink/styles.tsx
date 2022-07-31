@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
-const Hyperlink = styled.a``;
+interface Props {
+  textDecoration: string;
+}
+
+const Hyperlink = styled.a<Props>`
+  text-decoration: ${(props) => props.textDecoration};
+`;
 
 export { Hyperlink };
