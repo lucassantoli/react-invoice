@@ -5,16 +5,23 @@ import { Input as StyledInput, BoldInput as StyledBoldInput } from "./styles";
 interface Props {
   value?: string;
   placeholder?: string;
+  id?: string;
 }
 
-const Input: FC<Props> = ({ value, placeholder }) => {
-  return <StyledInput value={value} placeholder={placeholder}></StyledInput>;
-};
-
-const BoldInput: FC<Props> = ({ value, placeholder }) => {
+const Input: FC<Props> = ({ value, placeholder, id }) => {
   return (
-    <StyledBoldInput value={value} placeholder={placeholder}></StyledBoldInput>
+    <StyledInput id={id} value={value} placeholder={placeholder}></StyledInput>
   );
 };
 
-export { Input, BoldInput };
+const InputBold: FC<Props> = ({ value, placeholder, id }) => {
+  return (
+    <StyledBoldInput
+      id={id}
+      value={value}
+      placeholder={placeholder}
+    ></StyledBoldInput>
+  );
+};
+
+export { Input, InputBold };
