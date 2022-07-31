@@ -2,7 +2,8 @@ import { ButtonAdd, ButtonDelete } from "./Buttons/ButtonIcon";
 import { ButtonTextPrimary, ButtonTextDanger } from "./Buttons/ButtonText";
 import { Dropdown } from "./Dropdown";
 import { Hyperlink } from "./Hyperlink";
-import { Input } from "./Input";
+import { Input, InputBold } from "./Input";
+import { Label } from "./Label";
 
 export {
   ButtonAdd,
@@ -12,4 +13,6 @@ export {
   Dropdown,
   Hyperlink,
   Input,
+  InputBold,
+  Label,
 };
