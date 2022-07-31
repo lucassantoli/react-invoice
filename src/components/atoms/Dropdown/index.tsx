@@ -15,7 +15,7 @@ const Dropdown: FC<DropdownProps> = ({ list }) => {
   return (
     <StyledDropdown>
       {list.map((option: OptionProps, index: number) => (
-        <StyledOption key={index} value={option.value}>
+        <StyledOption key={option.value} value={option.text}>
           {option.text}
         </StyledOption>
       ))}
