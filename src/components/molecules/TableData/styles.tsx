@@ -8,6 +8,10 @@ const TableData = styled.td`
   &:last-child {
     justify-content: flex-end;
   }
+
+  &.align-right {
+    justify-content: right;
+  }
 `;
 
 export { TableData };

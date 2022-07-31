@@ -1,9 +1,8 @@
 import React, { FC } from "react";
 
 import { Table as StyledTable } from "./styles";
-import { TableRow } from "../../molecules/TableRow";
-import { TableHeader } from "../../molecules/TableHeader";
-import { TableData } from "../../molecules/TableData";
+import { Input, Label } from "../../atoms";
+import { TableRow, TableHeader, TableData } from "../../molecules";
 
 interface DataProps {
   value: string;
@@ -48,6 +47,33 @@ const Table: FC<TableProps> = ({ header, content }) => {
             ))}
           </TableRow>
         ))}
+
+        <TableRow columnTemplateGrid={columnTemplateGrid}>
+          <TableData></TableData>
+          <TableData></TableData>
+          <TableData></TableData>
+          <TableData className="align-right">Sub Total</TableData>
+          <TableData className="align-right">1000.00</TableData>
+        </TableRow>
+
+        <TableRow columnTemplateGrid={columnTemplateGrid}>
+          <TableData></TableData>
+          <TableData></TableData>
+          <TableData></TableData>
+          <TableData className="align-right">
+            <Label htmlFor="tax-input">Tax(%)</Label>
+            <Input id="tax-input"></Input>
+          </TableData>
+          <TableData className="align-right">130.00</TableData>
+        </TableRow>
+
+        <TableRow columnTemplateGrid={columnTemplateGrid}>
+          <TableData></TableData>
+          <TableData></TableData>
+          <TableData></TableData>
+          <TableData className="align-right">GrandTotal</TableData>
+          <TableData className="align-right">1130.00</TableData>
+        </TableRow>
       </tbody>
     </StyledTable>
   );
