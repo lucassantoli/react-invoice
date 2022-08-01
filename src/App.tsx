@@ -18,42 +18,16 @@ import {
 import { Table } from "./components/organisms";
 import { Container } from "./components/Container";
 
-import metaware_logo from "./assets/metaware_logo.png";
+import { atom, useRecoilState } from "recoil";
 
-function App() {
-  const customer_inputs = [
-    { key: "name", value: "Mr. John Doe" },
-    { key: "web_link", value: "John Doe Designs Inc." },
-    { key: "address1", value: "1 Infinite Loop" },
-    { key: "address2", value: "Cupertino, California, US" },
-    { key: "postal", value: "90210" },
-  ];
-  const company_inputs = [
-    { key: "name", value: "Metaware Labs" },
-    { key: "web_link", value: "www.metawarelabs.com" },
-    { key: "address1", value: "123 Yonge Street" },
-    { key: "address2", value: "Toronto, ON, Canada" },
-    { key: "postal", value: "M5S 1B6" },
-  ];
+const currencyState = atom({
+  key: "currency",
+  default: "USD",
+});
 
-  const currencies = [
-    { value: "GBP", text: "British Pound (£)" },
-    { value: "CAD", text: "Canadian Dollar ($)" },
-    { value: "EUR", text: "Euro (€)" },
-    { value: "INR", text: "Indian Rupee (₹)" },
-    { value: "NOK", text: "Norwegian Krone (kr)" },
-    { value: "USD", text: "US Dollar ($)" },
-  ];
-
-  const header = [
-    { value: "btn", text: "", colspan: 1 },
-    { value: "desc", text: "Description", colspan: 5 },
-    { value: "qty", text: "Quantity", colspan: 2 },
-    { value: "cost", text: "Cost $", colspan: 2 },
-    { value: "total", text: "Total", colspan: 2 },
-  ];
-
-  const content = [
+const invoiceState = atom({
+  key: "invoice",
+  default: [
     {
       btn: <ButtonDelete></ButtonDelete>,
       desc: <Input placeholder="Description"></Input>,
@@ -82,23 +56,75 @@ function App() {
       cost: null,
       total: null,
     },
+  ],
+});
+
+function App() {
+  const header = [
+    { value: "btn", text: "", colspan: 1 },
+    { value: "desc", text: "Description", colspan: 5 },
+    { value: "qty", text: "Quantity", colspan: 2 },
+    { value: "cost", text: "Cost $", colspan: 2 },
+    { value: "total", text: "Total", colspan: 2 },
   ];
+
+  const currencies = [
+    { value: "GBP", text: "British Pound (£)" },
+    { value: "CAD", text: "Canadian Dollar ($)" },
+    { value: "EUR", text: "Euro (€)" },
+    { value: "INR", text: "Indian Rupee (₹)" },
+    { value: "NOK", text: "Norwegian Krone (kr)" },
+    { value: "USD", text: "US Dollar ($)" },
+  ];
+
+  const inputs = {
+    customer_inputs: [
+      { key: "name", value: "Mr. John Doe" },
+      { key: "web_link", value: "John Doe Designs Inc." },
+      { key: "address1", value: "1 Infinite Loop" },
+      { key: "address2", value: "Cupertino, California, US" },
+      { key: "postal", value: "90210" },
+    ],
+    company_inputs: [
+      { key: "name", value: "Metaware Labs" },
+      { key: "web_link", value: "www.metawarelabs.com" },
+      { key: "address1", value: "123 Yonge Street" },
+      { key: "address2", value: "Toronto, ON, Canada" },
+      { key: "postal", value: "M5S 1B6" },
+    ],
+  };
+
+  const [invoice, setInvoice] = useRecoilState(invoiceState);
+  const [currency, setCurrency] = useRecoilState(currencyState);
+
+  const setInvoiceCurrency = (currency: string) => {
+    setCurrency(currency);
+  };
+
+  const setInvoiceContent = (content: any) => {
+    setInvoice(content);
+  };
 
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
         <Container>
-          <InvoiceHeader image={metaware_logo}></InvoiceHeader>
+          <InvoiceHeader></InvoiceHeader>
 
           <hr />
 
           <InvoiceForm
-            customer_inputs={customer_inputs}
-            company_inputs={company_inputs}
+            customer_inputs={inputs.customer_inputs}
+            company_inputs={inputs.company_inputs}
             currencies={currencies}
+            inputCurrency={setInvoiceCurrency}
           ></InvoiceForm>
 
-          <Table header={header} content={content}></Table>
+          <Table
+            header={header}
+            content={invoice}
+            contentCallback={setInvoiceContent}
+          ></Table>
 
           <div className="form-action-buttons">
             <ButtonTextPrimary>Reset</ButtonTextPrimary>
