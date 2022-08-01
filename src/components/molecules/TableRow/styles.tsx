@@ -6,7 +6,7 @@ interface Props {
 
 const TableRow = styled.tr<Props>`
   border-top: 1px solid #ddd;
-  font-size: 18px;
+  font-size: 16px;
   display: grid;
   grid-template-columns: ${(props) => props.gridTemplateColumns};
   min-height: 55px;

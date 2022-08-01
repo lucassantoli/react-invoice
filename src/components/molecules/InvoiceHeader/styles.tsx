@@ -40,7 +40,7 @@ const Header = styled.header`
 
         a {
           text-decoration: none;
-          font-size: 18px;
+          font-size: 16px;
         }
       }
     }
