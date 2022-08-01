@@ -143,22 +143,25 @@ const Table: FC<TableProps> = ({
           </TableRow>
         ))}
 
-        <TableRow columnTemplateGrid={columnTemplateGrid}>
-          {printMode ? (
-            <></>
-          ) : (
+        {printMode ? (
+          <></>
+        ) : (
+          <TableRow columnTemplateGrid={columnTemplateGrid}>
             <TableData>
               <ButtonAdd callback={handleAddNewRow}></ButtonAdd>
             </TableData>
-          )}
 
-          <TableData></TableData>
-          <TableData></TableData>
-          <TableData></TableData>
-          <TableData></TableData>
-        </TableRow>
+            <TableData></TableData>
+            <TableData></TableData>
+            <TableData></TableData>
+            <TableData></TableData>
+          </TableRow>
+        )}
 
-        <TableRow columnTemplateGrid={columnTemplateGrid}>
+        <TableRow
+          columnTemplateGrid={columnTemplateGrid}
+          className="thicker-border-top"
+        >
           <TableData></TableData>
           <TableData></TableData>
           <TableData></TableData>
