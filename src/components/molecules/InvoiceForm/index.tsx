@@ -15,34 +15,49 @@ interface CurrenciesProps {
 }
 
 interface Props {
-  company_inputs: Array<InputProps>;
-  customer_inputs: Array<InputProps>;
+  inputs: Array<InputProps>;
   currencies: Array<CurrenciesProps>;
+  selectedCurrency: string;
+  callbackCurrency: Function;
+  callbackInput: Function;
   children?: React.ReactNode;
-  inputCurrency: Function;
 }
 
 const InvoiceForm: FC<Props> = ({
-  company_inputs,
-  customer_inputs,
+  inputs,
   currencies,
-  inputCurrency,
+  selectedCurrency,
+  callbackCurrency,
+  callbackInput,
   children,
 }) => {
+  const handleInputChange = (value: any, key: string) => {
+    const newInputs = [...inputs];
+    const index = newInputs.findIndex((input) => input.key === key);
+    newInputs[index] = { key, value: value.target.value };
+
+    callbackInput(newInputs);
+  };
+
+  const handleCurrencyChange = (value: any) => {
+    callbackCurrency(value.target.value);
+  };
+
   return (
     <StyledForm action="">
-      <div className="customer">
-        {customer_inputs.map((input, index) => (
-          <Input value={input.value} key={index}></Input>
-        ))}
-      </div>
-
-      <div className="company">
-        {company_inputs.map((input, index) => (
-          <Input value={input.value} key={index}></Input>
-        ))}
-      </div>
-      <Dropdown list={currencies}></Dropdown>
+      {inputs.map((input: { key: string; value: string }) => (
+        <Input
+          value={input.value}
+          key={input.key}
+          onChange={(e: any) => handleInputChange(e, input.key)}
+        ></Input>
+      ))}
+      {inputs.length % 2 ? null : <></>}
+      <Dropdown
+        list={currencies}
+        value={selectedCurrency}
+        callback={handleCurrencyChange}
+      ></Dropdown>
     </StyledForm>
   );
 };

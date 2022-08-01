@@ -6,18 +6,9 @@ const Form = styled.form`
   margin-bottom: 1rem;
   padding: 0 1rem;
 
-  .company,
-  .customer {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    margin-bottom: 0.25rem;
-  }
-  .company {
-    input {
-      margin-left: auto;
-      text-align: right;
-    }
+  input:nth-child(even) {
+    margin-left: auto;
+    text-align: right;
   }
 `;
 
