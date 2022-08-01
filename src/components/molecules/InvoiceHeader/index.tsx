@@ -1,36 +1,26 @@
 import React, { FC } from "react";
 
-import metaware_logo from "../../../assets/metaware_logo.png";
-
 import { Header as StyledHeader } from "./styles";
 
 import { Hyperlink, Label, InputBold } from "../../atoms";
-import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 
-import { localStorageEffect } from "../../../utils";
+interface Props {
+  image: string;
+  hideImage: boolean;
+  callbackImage: Function;
+  invoiceNumber: string;
+  callbackInvoiceNumber: Function;
+  printMode: boolean;
+}
 
-const imageState = atom({
-  key: "image",
-  default: {
-    src: metaware_logo,
-    hideImage: false,
-  },
-  effects: [localStorageEffect("imageState")],
-});
-
-const invoiceNumberState = atom({
-  key: "invoiceNumber",
-  default: "10",
-  effects: [localStorageEffect("invoiceNumberState")],
-});
-
-const InvoiceHeader: FC = () => {
-  const image = useRecoilValue(imageState);
-  const setImage = useSetRecoilState(imageState);
-
-  const invoiceNumber = useRecoilValue(invoiceNumberState);
-  const setInvoiceNumber = useSetRecoilState(invoiceNumberState);
-
+const InvoiceHeader: FC<Props> = ({
+  image,
+  hideImage,
+  callbackImage,
+  invoiceNumber,
+  callbackInvoiceNumber,
+  printMode,
+}) => {
   const handleChangeImage = () => {
     const fileInput = document.getElementById("file-input");
     if (fileInput == null) return;
@@ -44,10 +34,10 @@ const InvoiceHeader: FC = () => {
     const saveImage = (base64string: string | ArrayBuffer | null) => {
       if (typeof base64string !== "string") return;
 
-      setImage(() => ({
+      callbackImage({
         src: base64string,
-        hideImage: image.hideImage,
-      }));
+        hideImage: hideImage,
+      });
     };
 
     let reader = new FileReader();
@@ -58,14 +48,14 @@ const InvoiceHeader: FC = () => {
   };
 
   const handleChangeImageVisibility = () => {
-    setImage(() => ({
-      src: image.src,
-      hideImage: !image.hideImage,
-    }));
+    callbackImage({
+      src: image,
+      hideImage: !hideImage,
+    });
   };
 
   const handleChangeInvoiceNumber = (e: any) => {
-    setInvoiceNumber(() => e.target.value);
+    callbackInvoiceNumber(e.target.value);
   };
 
   return (
@@ -88,19 +78,23 @@ const InvoiceHeader: FC = () => {
         </div>
 
         <div className="invoice-img">
-          {image.hideImage ? <></> : <img src={image.src} alt="Invoice logo" />}
-          <div className="img-controllers">
-            <input
-              type="file"
-              id="file-input"
-              hidden
-              onChange={handleImageSelection}
-            />
-            <Hyperlink onClick={handleChangeImage}>Edit logo</Hyperlink>
-            <Hyperlink onClick={handleChangeImageVisibility}>
-              {image.hideImage ? "Show logo" : "Hide logo"}
-            </Hyperlink>
-          </div>
+          {hideImage ? <></> : <img src={image} alt="Invoice logo" />}
+          {printMode ? (
+            <></>
+          ) : (
+            <div className="img-controllers">
+              <input
+                type="file"
+                id="file-input"
+                hidden
+                onChange={handleImageSelection}
+              />
+              <Hyperlink onClick={handleChangeImage}>Edit logo</Hyperlink>
+              <Hyperlink onClick={handleChangeImageVisibility}>
+                {hideImage ? "Show logo" : "Hide logo"}
+              </Hyperlink>
+            </div>
+          )}
         </div>
       </div>
     </StyledHeader>

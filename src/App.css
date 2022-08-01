@@ -1,8 +1,25 @@
 .form-action-buttons {
   display: flex;
   gap: 0.25rem;
+  margin-bottom: 2rem;
 }
 
 .red-text {
   color: red;
+}
+
+.print {
+  display: none;
+}
+
+@media print {
+  .noprint,
+  .no-print {
+    visibility: hidden;
+    display: none;
+  }
+
+  .print {
+    display: initial;
+  }
 }

@@ -20,6 +20,7 @@ interface Props {
   selectedCurrency: string;
   callbackCurrency: Function;
   callbackInput: Function;
+  printMode: boolean;
   children?: React.ReactNode;
 }
 
@@ -29,6 +30,7 @@ const InvoiceForm: FC<Props> = ({
   selectedCurrency,
   callbackCurrency,
   callbackInput,
+  printMode,
   children,
 }) => {
   const handleInputChange = (value: any, key: string) => {
@@ -53,11 +55,15 @@ const InvoiceForm: FC<Props> = ({
         ></Input>
       ))}
       {inputs.length % 2 ? null : <></>}
-      <Dropdown
-        list={currencies}
-        value={selectedCurrency}
-        callback={handleCurrencyChange}
-      ></Dropdown>
+      {printMode ? (
+        <></>
+      ) : (
+        <Dropdown
+          list={currencies}
+          value={selectedCurrency}
+          callback={handleCurrencyChange}
+        ></Dropdown>
+      )}
     </StyledForm>
   );
 };
