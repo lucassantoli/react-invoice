@@ -20,7 +20,7 @@ const Dropdown: FC<DropdownProps> = ({ list, value, callback }) => {
       onChange={(e) => (callback ? callback(e) : null)}
     >
       {list.map((option: OptionProps, index: number) => (
-        <StyledOption key={option.value} value={option.text}>
+        <StyledOption key={option.value} value={option.value}>
           {option.text}
         </StyledOption>
       ))}
