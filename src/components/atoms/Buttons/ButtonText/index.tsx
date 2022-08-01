@@ -6,18 +6,29 @@ import {
 } from "./styles";
 
 interface Props {
+  callback?: Function;
   children: React.ReactNode;
 }
 
-const ButtonTextPrimary: FC<Props> = ({ children }) => {
+const ButtonTextPrimary: FC<Props> = ({ children, callback }) => {
   return (
-    <StyledButtonTextPrimary title="Botão">{children}</StyledButtonTextPrimary>
+    <StyledButtonTextPrimary
+      title="Botão"
+      onClick={(e) => (callback ? callback(e) : null)}
+    >
+      {children}
+    </StyledButtonTextPrimary>
   );
 };
 
-const ButtonTextDanger: FC<Props> = ({ children }) => {
+const ButtonTextDanger: FC<Props> = ({ children, callback }) => {
   return (
-    <StyledButtonTextDanger title="Botão">{children}</StyledButtonTextDanger>
+    <StyledButtonTextDanger
+      title="Botão"
+      onClick={(e) => (callback ? callback(e) : null)}
+    >
+      {children}
+    </StyledButtonTextDanger>
   );
 };
 
