@@ -4,6 +4,8 @@ import { Dropdown as StyledDropdown, Option as StyledOption } from "./styles";
 
 interface DropdownProps {
   list: Array<OptionProps>;
+  value?: string;
+  callback?: Function;
 }
 
 interface OptionProps {
@@ -11,9 +13,12 @@ interface OptionProps {
   text: string;
 }
 
-const Dropdown: FC<DropdownProps> = ({ list }) => {
+const Dropdown: FC<DropdownProps> = ({ list, value, callback }) => {
   return (
-    <StyledDropdown>
+    <StyledDropdown
+      value={value}
+      onChange={(e) => (callback ? callback(e) : null)}
+    >
       {list.map((option: OptionProps, index: number) => (
         <StyledOption key={option.value} value={option.text}>
           {option.text}

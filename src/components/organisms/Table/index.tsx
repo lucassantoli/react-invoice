@@ -63,7 +63,7 @@ const Table: FC<TableProps> = ({ header, content, contentCallback }) => {
           <TableData></TableData>
           <TableData className="align-right">
             <Label htmlFor="tax-input">Tax(%)</Label>
-            <Input id="tax-input"></Input>
+            <Input type="number" id="tax-input"></Input>
           </TableData>
           <TableData className="align-right">130.00</TableData>
         </TableRow>

@@ -81,6 +81,7 @@ const InvoiceHeader: FC = () => {
           </Label>
           <InputBold
             id="invoice-number-input"
+            type="number"
             value={invoiceNumber}
             onChange={handleChangeInvoiceNumber}
           ></InputBold>
