@@ -19,12 +19,14 @@ interface Props {
   customer_inputs: Array<InputProps>;
   currencies: Array<CurrenciesProps>;
   children?: React.ReactNode;
+  inputCurrency: Function;
 }
 
 const InvoiceForm: FC<Props> = ({
   company_inputs,
   customer_inputs,
   currencies,
+  inputCurrency,
   children,
 }) => {
   return (

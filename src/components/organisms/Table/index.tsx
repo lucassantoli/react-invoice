@@ -13,9 +13,10 @@ interface DataProps {
 interface TableProps {
   header: Array<DataProps>;
   content: Array<Object>;
+  contentCallback: Function;
 }
 
-const Table: FC<TableProps> = ({ header, content }) => {
+const Table: FC<TableProps> = ({ header, content, contentCallback }) => {
   const sortedContent = content.map((contentObj: { [index: string]: any }) => {
     const row: Array<string> = [];
     header.forEach((headerElement) => {
