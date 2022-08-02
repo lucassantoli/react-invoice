@@ -14,7 +14,7 @@ import {
 import { Table } from "./components/organisms";
 import { Container } from "./components/Container";
 
-import { localStorageEffect } from "./utils";
+import { localStorageEffect, exchangeClient } from "./services";
 
 import {
   atom,
@@ -147,7 +147,24 @@ function App() {
   const setInvoiceCurrency = useSetRecoilState(invoiceCurrencyState);
   const resetInvoiceCurrency = useResetRecoilState(invoiceCurrencyState);
   const handleChangeInvoiceCurrency = (currency: string) => {
-    setInvoiceCurrency(() => currency);
+    exchangeClient
+      .fetchOne(invoiceCurrency, currency)
+      .then((res) => {
+        const exchange = res.data.result[currency];
+        setInvoiceCurrency(() => currency);
+        setInvoiceContent((oldContent) =>
+          oldContent.map((product) => ({
+            ...product,
+            cost: parseFloat((product.cost * exchange).toFixed(2)),
+          }))
+        );
+      })
+      .catch(() => {
+        alert("An error occured when trying to exchange");
+      });
+    //setInvoiceContent((oldContent) => {
+
+    //})
   };
 
   const invoiceForm = useRecoilValue(invoiceFormState);

@@ -4,6 +4,7 @@ import { Table as StyledTable } from "./styles";
 import { ButtonAdd, ButtonDelete, Input, Label } from "../../atoms";
 import { TableRow, TableHeader, TableData } from "../../molecules";
 
+import { InvoiceCalculations } from "../../../services";
 import { formatMoney } from "../../../utils";
 
 interface ContentProps {
@@ -66,30 +67,6 @@ const Table: FC<TableProps> = ({
     const newContent = [...content];
     newContent.splice(index, 1);
     contentCallback(newContent);
-  };
-
-  const calculateTax = () => {
-    return (
-      parseFloat(tax) *
-      0.01 *
-      content.reduce((prev, curr) => prev + curr.qty * curr.cost, 0)
-    );
-  };
-
-  const calculateDiscount = () => {
-    return (
-      parseFloat(discount) *
-      0.01 *
-      content.reduce((prev, curr) => prev + curr.qty * curr.cost, 0)
-    );
-  };
-
-  const calculateTotal = () => {
-    return (
-      content.reduce((prev, curr) => prev + curr.qty * curr.cost, 0) +
-      calculateTax() -
-      calculateDiscount()
-    );
   };
 
   return (
@@ -206,7 +183,10 @@ const Table: FC<TableProps> = ({
             <span className="print">{tax}</span>
           </TableData>
           <TableData className="align-right">
-            {formatMoney(calculateTax(), currency ? currency.symbol : "$")}
+            {formatMoney(
+              InvoiceCalculations.calculateTax(tax, content),
+              currency ? currency.symbol : "$"
+            )}
           </TableData>
         </TableRow>
 
@@ -227,7 +207,7 @@ const Table: FC<TableProps> = ({
           <TableData className="align-right">
             {"- " +
               formatMoney(
-                calculateDiscount(),
+                InvoiceCalculations.calculateDiscount(discount, content),
                 currency ? currency.symbol : "$"
               )}
           </TableData>
@@ -239,7 +219,10 @@ const Table: FC<TableProps> = ({
           <TableData></TableData>
           <TableData className="align-right">Grand Total</TableData>
           <TableData className="align-right">
-            {formatMoney(calculateTotal(), currency ? currency.symbol : "$")}
+            {formatMoney(
+              InvoiceCalculations.calculateTotal(tax, discount, content),
+              currency ? currency.symbol : "$"
+            )}
           </TableData>
         </TableRow>
       </tbody>
