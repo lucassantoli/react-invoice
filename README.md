@@ -1,46 +1,44 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Simple Invoice - Made With React
 
-## Available Scripts
+## Webpack Scripts
 
-In the project directory, you can run:
+### Run the application
+To run the application on localhost, you must run the following commands
 
-### `npm start`
+```
+npm i
+npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+After that, your main browser will open a tab on <a>localhost:3000</a>.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Build the application
+To build the application for production, run the following commands
 
-### `npm test`
+```
+npm i
+npm build
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This will create a folder on the root directory with the application's static files.
 
-### `npm run build`
+## Requirements
+### Minimum
+- [x] Create a new public repository
+- [x] Convert the application from AngularJS to React, keeping the functionalities present in the original application
+- [x] Document the step-by-step process using well-written commits in english
+- [x] Break the application into reusable components, using good code and folder structures pratices.
+- [x] Add a percentage discount feature to each product
+- [x] Create a script in Webpack to run the server in localhost and build it to production
+- [x] Describe the scripts in a README.md file
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Desirable
+- [x] Transpose the whole application to Typescript
+- [x] Transfer all the styles from CSS to Styled-Components
+- [ ] Write unit tests using Jest
+- [x] Use Recoil as state management library
+- [x] Add a funcionality to convert values by currency (pulling from some API the exchange rate)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Exceptional
+- [ ] Be able, at some point, to run on same build application in AngularJS and React
