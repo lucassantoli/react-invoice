@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const API_KEY = "627589f75e-dd82a28a9a-rg0275";
-
 const exchangeClient = axios.create({
   baseURL: `https://api.fastforex.io`,
   headers: {
@@ -20,7 +18,7 @@ exchangeClient.interceptors.response.use(
 
 const fetchOne = (from, to) => {
   return exchangeClient.get(
-    `/fetch-one?from=${from}&to=${to}&api_key=${API_KEY}`
+    `/fetch-one?from=${from}&to=${to}&api_key=${process.env.REACT_APP_EXCHANGE_API_KEY}`
   );
 };
 
