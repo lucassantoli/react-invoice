@@ -28,9 +28,9 @@ This will create a folder on the root directory with the application's static fi
 - [x] Create a new public repository
 - [x] Convert the application from AngularJS to React, keeping the functionalities present in the original application
 - [x] Document the step-by-step process using well-written commits in english
-- [x] Break the application into reusable components, using good code and folder structures pratices.
+- [x] Break the application into reusable components, using good code and folder structures practices.
 - [x] Add a percentage discount feature to each product
-- [x] Create a script in Webpack to run the server in localhost and build it to production
+- [x] Create a script in Webpack to run the server on localhost and build it to production
 - [x] Describe the scripts in a README.md file
 
 ### Desirable
@@ -38,7 +38,7 @@ This will create a folder on the root directory with the application's static fi
 - [x] Transfer all the styles from CSS to Styled-Components
 - [ ] Write unit tests using Jest
 - [x] Use Recoil as state management library
-- [x] Add a funcionality to convert values by currency (pulling from some API the exchange rate)
+- [x] Add a functionality to convert values by currency (pulling info about the exchange rate from some API)
 
 ### Exceptional
-- [ ] Be able, at some point, to run on same build application in AngularJS and React
+- [ ] Be able, at some point, to run both AngularJS and React application on the same build
