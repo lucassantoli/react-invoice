@@ -18,6 +18,8 @@ interface TableProps {
   contentCallback: Function;
   tax: string;
   taxCallback: Function;
+  discount: string;
+  discountCallback: Function;
   printMode: boolean;
   currency:
     | {
@@ -35,6 +37,8 @@ const Table: FC<TableProps> = ({
   contentCallback,
   tax,
   taxCallback,
+  discount,
+  discountCallback,
   printMode,
   currency,
 }) => {
@@ -47,6 +51,10 @@ const Table: FC<TableProps> = ({
 
   const handleTaxChange = (tax: any) => {
     taxCallback(tax.target.value);
+  };
+
+  const handleDiscountChange = (discount: any) => {
+    discountCallback(discount.target.value);
   };
 
   const handleAddNewRow = () => {
@@ -68,10 +76,19 @@ const Table: FC<TableProps> = ({
     );
   };
 
+  const calculateDiscount = () => {
+    return (
+      parseFloat(discount) *
+      0.01 *
+      content.reduce((prev, curr) => prev + curr.qty * curr.cost, 0)
+    );
+  };
+
   const calculateTotal = () => {
     return (
       content.reduce((prev, curr) => prev + curr.qty * curr.cost, 0) +
-      calculateTax()
+      calculateTax() -
+      calculateDiscount()
     );
   };
 
@@ -190,6 +207,29 @@ const Table: FC<TableProps> = ({
           </TableData>
           <TableData className="align-right">
             {formatMoney(calculateTax(), currency ? currency.symbol : "$")}
+          </TableData>
+        </TableRow>
+
+        <TableRow columnTemplateGrid={columnTemplateGrid}>
+          <TableData></TableData>
+          <TableData></TableData>
+          <TableData></TableData>
+          <TableData className="align-right">
+            <Label htmlFor="discount-input">Discount(%)&nbsp;</Label>
+            <Input
+              type="number"
+              id="discount-input"
+              value={discount.toString()}
+              onChange={handleDiscountChange}
+            ></Input>
+            <span className="print">{discount}</span>
+          </TableData>
+          <TableData className="align-right">
+            {"- " +
+              formatMoney(
+                calculateDiscount(),
+                currency ? currency.symbol : "$"
+              )}
           </TableData>
         </TableRow>
 

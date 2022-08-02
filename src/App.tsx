@@ -64,6 +64,12 @@ const invoiceTaxState = atom({
   effects: [localStorageEffect("invoiceTaxState")],
 });
 
+const invoiceDiscountState = atom({
+  key: "discount",
+  default: "0",
+  effects: [localStorageEffect("invoiceDiscountState")],
+});
+
 const invoiceImageState = atom({
   key: "image",
   default: {
@@ -130,6 +136,13 @@ function App() {
     setInvoiceTax(() => tax);
   };
 
+  const invoiceDiscount = useRecoilValue(invoiceDiscountState);
+  const setInvoiceDiscount = useSetRecoilState(invoiceDiscountState);
+  const resetInvoiceDiscount = useResetRecoilState(invoiceDiscountState);
+  const handleChangeInvoiceDiscount = (discount: any) => {
+    setInvoiceDiscount(() => discount);
+  };
+
   const invoiceCurrency = useRecoilValue(invoiceCurrencyState);
   const setInvoiceCurrency = useSetRecoilState(invoiceCurrencyState);
   const resetInvoiceCurrency = useResetRecoilState(invoiceCurrencyState);
@@ -155,6 +168,7 @@ function App() {
     resetInvoiceCurrency();
     resetInvoiceContent();
     resetInvoiceTax();
+    resetInvoiceDiscount();
     resetInvoiceNumber();
     resetInvoiceImage();
   };
@@ -195,6 +209,8 @@ function App() {
             contentCallback={handleChangeInvoiceContent}
             tax={invoiceTax}
             taxCallback={handleChangeInvoiceTax}
+            discount={invoiceDiscount}
+            discountCallback={handleChangeInvoiceDiscount}
             printMode={printMode}
             currency={currencies.find(
               (currency) => currency.value === invoiceCurrency
