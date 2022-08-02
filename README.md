@@ -18,7 +18,7 @@ To build the application for production, run the following commands
 
 ```
 npm i
-npm build
+npm run build
 ```
 
 This will create a folder on the root directory with the application's static files.
